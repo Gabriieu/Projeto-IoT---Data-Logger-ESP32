@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Sistema inteligente de monitoramento e controle IoT em tempo real</strong><br>
-  ASP.NET MVC • ESP32 • FIWARE • MQTT
+  ASP.NET MVC • ESP32 • FIWARE
 </p>
 
 ---
