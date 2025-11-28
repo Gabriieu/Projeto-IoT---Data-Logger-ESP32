@@ -1,31 +1,64 @@
-# 📡 IoT Portal – MVC + ESP32 + FIWARE
+# 📡 IoT Portal MVC + ESP32 + FIWARE
 
-Sistema completo de monitoramento e controle IoT utilizando **ASP.NET MVC**, **ESP32** e **FIWARE**, permitindo acompanhamento em tempo real de sensores, visualização gráfica e alertas automáticos.
+<p align="center">
+  <img src="images/dashboard.jpg" width="800" />
+</p>
+
+<p align="center">
+  <strong>Sistema inteligente de monitoramento e controle IoT em tempo real</strong><br>
+  ASP.NET MVC • ESP32 • FIWARE • MQTT
+</p>
 
 ---
 
-## 🧠 Visão Geral do Projeto
+## 🌐 Sobre o Projeto
 
-Este projeto integra três camadas principais:
+O **IoT Portal MVC** é uma solução completa para monitoramento remoto de dispositivos IoT, permitindo visualizar dados ambientais em tempo real, definir limites críticos e acionar alertas automáticos com buzzer via ESP32, tudo integrado ao ecossistema **FIWARE**.
 
-* 🌐 **Portal Web MVC (.NET)** – Interface de monitoramento e controle
-* 🔌 **ESP32** – Dispositivo IoT com sensores
-* ☁️ **FIWARE** – Plataforma intermediária para gerenciamento de contexto
+---
 
-O sistema é capaz de:
+## 🧠 Arquitetura do Sistema
 
-* Exibir temperatura, umidade e luminosidade em tempo real
-* Definir limites críticos para cada sensor
-* Emitir alertas visuais
-* Acionar buzzer automaticamente ao ultrapassar limites
-* Visualizar localização do dispositivo em mapa
-* Mostrar previsão do tempo local
+```
+[ App Android ]
+        ↓
+Configuração Wi-Fi do ESP32
+        ↓
+[ ESP32 + Sensores ]
+        ↓ MQTT
+[ FIWARE IoT Agent ]
+        ↓
+[ Orion Context Broker ]
+        ↓
+[ STH-Comet ]
+        ↓
+[ Portal MVC ASP.NET ]
+```
+
+```
+[ ESP32 + Sensores ]
+        ↓ MQTT
+[ FIWARE IoT Agent ]
+        ↓
+[ Orion Context Broker ]
+        ↓
+[ STH-Comet ]
+        ↓
+[ Portal MVC ASP.NET ]
+```
+
+Componentes:
+
+* 📱 **App Android** – Configura a rede Wi-Fi do ESP32
+* 🌐 **Portal Web (.NET MVC)** – Interface de monitoramento
+* 🔌 **ESP32** – Dispositivo IoT com sensores físicos
+* ☁️ **FIWARE** – Gerenciamento de contexto e comunicação
 
 ---
 
 ## ⚙️ Tecnologias Utilizadas
 
-### Dashboard
+### 💻 Dashboard Web
 
 * ASP.NET MVC
 * Entity Framework Core
@@ -35,48 +68,57 @@ O sistema é capaz de:
 * Leaflet.js
 * JavaScript
 
-### IoT
+### 🔧 IoT
 
 * ESP32
 * MQTT
 
-### Plataforma
+### ☁️ Plataforma FIWARE
 
-* FIWARE Orion Context Broker
-* FIWARE IoT Agent MQTT
-* FIWARE STH-Comet
-
----
-
-## 📋 Funcionalidades
-
-✔ Monitoramento de sensores em tempo real
-✔ Exibição gráfica com histórico
-✔ Alertas visuais de limite
-✔ Buzzer automático em situação crítica
-✔ Geolocalização do dispositivo
-✔ Previsão meteorológica integrada
+* Orion Context Broker
+* IoT Agent MQTT
+* STH-Comet
 
 ---
 
-## 🔌 Firmware ESP32 (Resumo)
+## 📱 Aplicativo Android (Configuração Bluetooth)
 
-O ESP32 envia dados via MQTT:
+O sistema conta com um **aplicativo Android dedicado** que se conecta ao ESP32 via **Bluetooth** para realizar a configuração inicial da rede Wi-Fi.
 
-E recebe comandos:
+Funções do aplicativo:
 
-* on → Liga LED
-* off → Desliga LED
-* buzzer_on → Ativa buzzer
-* buzzer_off → Desativa buzzer
+✔ Seleção de redes Wi-Fi disponíveis
+✔ Envio de SSID e senha ao ESP32
+✔ Configuração sem necessidade de cabo
+✔ Interface amigável para o usuário
+✔ Provisionamento rápido do dispositivo
+
+Fluxo de uso:
+
+1. Usuário abre o app Android
+2. Conecta ao ESP32 via Bluetooth
+3. Seleciona a rede Wi-Fi
+4. O ESP32 conecta-se automaticamente à internet
 
 ---
 
-## 🔔 Sistema de Alertas
+## 📋 Funcionalidades Principais
 
-O sistema verifica continuamente se algum valor ultrapassa o limite configurado.
+✔ Monitoramento em tempo real
+✔ Gráficos dinâmicos com histórico
+✔ Definição de limites por sensor
+✔ Alertas visuais automáticos
+✔ Acionamento de buzzer remoto
+✔ Localização via mapa interativo
+✔ Clima local em tempo real
 
-Se ultrapassar:
+---
+
+## 🔔 Sistema Inteligente de Alertas
+
+Quando um valor ultrapassa o limite configurado, o sistema envia automaticamente o comando ao FIWARE:
+
+### 📢 Comando enviado (limite excedido):
 
 ```json
 {
@@ -87,7 +129,7 @@ Se ultrapassar:
 }
 ```
 
-Caso contrário:
+### ✅ Comando enviado (condição normal):
 
 ```json
 {
@@ -100,32 +142,53 @@ Caso contrário:
 
 ---
 
-## 📊 Telas do Sistema
+## 🔌 Firmware ESP32 (Resumo)
 
-* ✅ Lista de dispositivos
-* ✅ Tela de detalhes com gráfico em tempo real
-* ✅ Mapa interativo
-* ✅ Clima local
-* ✅ Alertas visuais
+O ESP32:
 
----
+* Envia dados via MQTT
+* Recebe comandos do FIWARE
 
-## Autores
+Comandos suportados:
 
-![Autores](images/alunos.jpg)
-
----
-
-## Dashboard do Sistema
-
-![Dashboard do Portal IoT](images/dashboard.jpg)
+* 🟢 `on` → Liga LED
+* 🔴 `off` → Desliga LED
+* 🔊 `buzzer_on` → Ativa buzzer
+* 🔇 `buzzer_off` → Desativa buzzer
 
 ---
 
-## Gráficos
+## 📊 Interface Web
 
-![Temperatura](images/temperature.jpg)
-![Humidade](images/humidity.jpg)
-![Luminosidade](images/luminosity.jpg)
+### 📈 Dashboard
+
+<p align="center">
+  <img src="images/dashboard.jpg" width="750" />
+</p>
+
+### 📉 Gráficos dos Sensores
+
+<p align="center">
+  <img src="images/temperature.jpg" width="450" />
+  <img src="images/humidity.jpg" width="450" />
+  <img src="images/luminosity.jpg" width="450" />
+</p>
+
+---
+
+## 📍 Dispositivo Físico (Protótipo)
+
+<p align="center">
+  <img src="images/dispositivo-1.jpeg" width="400" />
+  <img src="images/dispositivo-2.jpeg" width="400" />
+</p>
+
+---
+
+## 👨‍💻 Autores
+
+<p align="center">
+  <img src="images/alunos.jpg" width="600" />
+</p>
 
 ---
