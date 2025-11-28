@@ -54,8 +54,8 @@ uint8_t tela = 0;
 
 // ------------------ WI-FI (mutável via BT) ------------------
 // Valores iniciais (fallback). Serão substituídos ao receber via BT.
-String wifi_ssid = "iPhone do dudu";
-String wifi_pass = "duduzin76";
+String wifi_ssid = "";
+String wifi_pass = "";
 
 // ------------------ WI-FI + MQTT ------------------
 WiFiClient wifiClient;
