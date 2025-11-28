@@ -13,7 +13,7 @@
 
 ## 🌐 Sobre o Projeto
 
-O **IoT Portal MVC** é uma solução completa para monitoramento remoto de dispositivos IoT, permitindo visualizar dados ambientais em tempo real, definir limites críticos e acionar alertas automáticos com buzzer via ESP32, tudo integrado ao ecossistema **FIWARE**.
+Solução completa para monitoramento remoto de dispositivos IoT, permitindo visualizar dados ambientais em tempo real, definir limites críticos e acionar alertas automáticos com buzzer via ESP32, tudo integrado ao ecossistema **FIWARE**.
 
 ---
 
